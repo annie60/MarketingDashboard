@@ -1,0 +1,33 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding oj-flex">
+  <div id='chart-container' class="oj-flex-item">
+    <oj-chart id="pieChart"
+        type="pie"
+        series="[[pieSeriesValue]]"
+        animation-on-display="auto"
+        animation-on-data-change="auto"
+        style-defaults.three-d-effect="off"
+        hover-behavior="dim"
+        style="max-width:500px;width:100%;height:350px;">
+    </oj-chart>
+  </div>
+  <div class="oj-flex-item  oj-sm-flex-direction-column">
+    <div class="oj-flex-item">
+    <oj-label>Checking For</oj-label>
+    <oj-input-text id="input" value="{{valueToSearch}}"></oj-input-text>
+    <oj-button on-click='[[getSearch]]' class="demo-button-error">Search</oj-button>
+    </div>
+    <oj-chart class="oj-flex-item" id="pieChart"
+        type="pie"
+        series="[[pieSeriesValue2]]"
+        animation-on-display="auto"
+        animation-on-data-change="auto"
+        style-defaults.three-d-effect="off"
+        hover-behavior="dim"
+        style="max-width:500px;width:100%;height:350px;">
+    </oj-chart>
+  </div>
+</div>

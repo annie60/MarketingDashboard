@@ -1,0 +1,74 @@
+<!--
+ Copyright (c) 2014, 2019, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding oj-flex">
+  <div class="oj-flex-item">
+  <div class="oj-flex oj-sm-flex-direction-column oj-padding-bottom">
+    <div class="oj-flex oj-sm-flex-direction-column"
+    data-bind='style: {"max-width": smScreen() ? "100%":"90%" }'
+    style="max-height: 50px;" >
+    <oj-text-area class="oj-flex-item" id="text-area" value="{{valueMsg}}">
+    </oj-text-area>
+    </div>
+    <div class="oj-flex oj-sm-flex-direction-column oj-sm-justify-content-flex-end
+    oj-padding-top"
+    data-bind='style: {"max-width": smScreen() ? "90%":"80%" }'
+    style="max-height: 50px" >
+      <span class="counter oj-flex-item oj-padding-bottom oj-padding-start"
+      data-bind="text:'Characters left:'+ chars()" style="text-align: left;" ></span>
+
+      <oj-button id='bt1' on-click='[[sendEvent]]'
+      disabled='[[isOverTop]]'
+      style="max-width: 30%;"
+      class="oj-button-md oj-flex-item demo-button-error oj-padding-start oj-sm-justify-content-flex-end">
+      Send</oj-button>
+    </div>
+  </div>
+  <div class="oj-flex-item" style="width: 70%;" id="container-not"></div>
+  <oj-list-view id="listview" aria-label="notes" class="oj-padding-top"
+  data-bind='style: {"max-width": smScreen() ? "300px":"600px" }'
+  style="width:600px;height:300px;overflow-x:hidden"
+                data="[[dataSource]]"
+                scroll-policy="loadMoreOnScroll" scroll-policy-options.fetch-size="15">
+                <template slot="itemTemplate">
+                  <div class="oj-flex  oj-sm-align-items-center">
+                <div class="oj-flex oj-sm-align-items-center oj-sm-margin-2x">
+                  <div class="of-flex-item">
+                    <oj-avatar role="img" size="sm" initials='[[$current.data.initials]]'
+                      data-bind="attr:{'aria-label':'Avatar of ' + $current.data.user,
+                        'title':'Avatar of '+$current.data.user}">
+                    </oj-avatar>
+                  </div>
+                </div>
+                    <div class="oj-flex oj-sm-flex-direction-column"
+                    data-bind='style: {"max-width": smScreen() ? "50%":"" }'>
+                      <div class="oj-flex-item" style="font-weight: bold;">
+                          <span class="oj-flex-item">
+                              <oj-bind-text data-bind='html: $current.data.userUrl'></oj-bind-text>
+                          </span>
+                      </div>
+                      <div class="oj-flex-item"
+                      data-bind='style: {"max-width": smScreen() ? "50%":"" }'>
+                          <oj-bind-text data-bind='html: $current.data.content'></oj-bind-text>
+                      </div>
+                    </div>
+                </template>
+</oj-list-view>
+</div>
+<div class="oj-flex-item oj-padding-top" style="height: 230px;"
+data-bind="visible: !smScreen()">
+  <h4><b>Current hashtags</b></h4>
+  <oj-list-view id="listview" aria-label="notes" style="width:60%;height:100%;overflow-x:hidden"
+                data="[[dataSourceGroups]]">
+                <template slot="itemTemplate">
+                    <div class="oj-flex-bar" >
+                        <div class="oj-flex-bar-start">
+                            <span class="oj-flex-item">
+                                <oj-bind-text value='[[$current.data.group]]'></oj-bind-text>
+                            </span>
+                        </div>
+                    </div>
+                </template>
+</div>
+</div>
