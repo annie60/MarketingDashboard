@@ -17,11 +17,14 @@ define(['ojs/ojcore', 'knockout', 'socket.io', 'jquery', 'Noty', 'appController'
       self.value = ko.observable();
       self.limit = 100;
       self.valueMsg = ko.observable('');
+      //TODO: Change to have dynamic URL
       var socket = io.connect("http://localhost:3000");
       socket.on('connect', function() {
         console.log('Socket connected: ', socket.connected);
       });
-
+      /* *
+      *  Socket server functionality
+      * */
       socket.on("send_new", function (data) {
         new Noty({
           text: 'New tag created',
@@ -60,22 +63,27 @@ define(['ojs/ojcore', 'knockout', 'socket.io', 'jquery', 'Noty', 'appController'
       })
       //Used to generate the REST URL to include the search criteria
       self.searchURLMsg = ko.computed(function() {
+        //TODO: Change to have dynamic URL
         return "http://localhost:8080/message" +
         '?value=' + self.value();
       });
+      /* *
+      * Models
+      * */
       const Message = oj.Model.extend({
         idAttribute: "id",
         parse: (data)=>{
           return{
             initials:data.user.split('@')[1].charAt(0),
             user: data.user,
-            userUrl: data.user.replace(/(\S*)/g,'<a href="#">$1</a>'),
-            content: data.content.replace(/#(\S*)/g,'<a href="#">#$1</a>')
+            userUrl: data.user.replace(/(\S*)/g,'<a href="#">$1</a>'), //TODO: real URL for the user profile
+            content: data.content.replace(/#(\S*)/g,'<a href="#">#$1</a>') //TODO: real URL to search for a specific tag
           }
         }
       });
 
       const Messages = oj.Collection.extend({
+        //TODO: Change to have dynamic URL
         url: "http://localhost:8080/messages",
         model: Message,
         parse: function(msgs) {
@@ -90,6 +98,7 @@ define(['ojs/ojcore', 'knockout', 'socket.io', 'jquery', 'Noty', 'appController'
       });
 
       const Groups = oj.Collection.extend({
+        //TODO: Change to have dynamic URL
         url: "http://localhost:8080/groups/getTop5",
         model: Group,
         parse: function(grps) {
@@ -123,7 +132,7 @@ define(['ojs/ojcore', 'knockout', 'socket.io', 'jquery', 'Noty', 'appController'
         self.chars(self.limit);
         const promise = $.ajax({
           type: "POST",
-          url: `http://localhost:8080/message?value=${msgEncoded}&user=@${app.userLogin()}`,
+          url: `http://localhost:8080/message?value=${msgEncoded}&user=@${app.userLogin()}`,//TODO: Change to have dynamic URL
           success: () => {
             msgColl.fetch();
           },

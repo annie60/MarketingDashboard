@@ -13,6 +13,9 @@ The whole applications allows responsive layout.
 2. [Notifications server](https://github.com/annie60/socketio-nodejs)
 
 # Demo
+### Creates messages and notifies user for refresh
 ![Creates messages and notifies user for refresh](demo/NewMessage.gif)
+### Get notification for new hash tags
 ![Get notification for new hash tags](demo/NewTag.gif)
+### Shows current percentage for tags created
 ![Shows current percentage for tags created](demo/Graphics.gif)

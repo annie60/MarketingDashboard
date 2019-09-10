@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ * Copyright (c) 2014, 2019, Oracle and/or its affiliates.
  * The Universal Permissive License (UPL), Version 1.0
  */
 define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojknockout', 'ojs/ojbutton'
@@ -14,7 +14,7 @@ define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojknockout', 'ojs/ojbutton'
       self.getSearch = ()=>{
         $.ajax({
           type: "GET",
-          url: `http://localhost:8080/groups/getAll?group=${self.valueToSearch()}`,
+          url: `http://localhost:8080/groups/getAll?group=${self.valueToSearch()}`, //TODO: Change to have dynamic URL
           success: (data) => {
             let converted = ko.observableArray();
             data.forEach((value) =>{
@@ -48,7 +48,7 @@ define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojknockout', 'ojs/ojbutton'
       self.handleActivated = function(info) {
         $.ajax({
           type: "GET",
-          url: "http://localhost:8080/groups/getAll",
+          url: "http://localhost:8080/groups/getAll",//TODO: Change to have dynamic URL
           success: (data) => {
             let converted = ko.observableArray();
             data.forEach((value) =>{
